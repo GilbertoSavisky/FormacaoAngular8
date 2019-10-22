@@ -13,9 +13,10 @@ import { LoginComponent } from './autenticacao';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
