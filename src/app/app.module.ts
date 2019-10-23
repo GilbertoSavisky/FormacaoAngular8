@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './autenticacao';
 import { LoginRoutingModule } from './autenticacao/login/login-routing.module';
+import { CadastrarPjComponent } from './autenticacao/cadastro-pj/components/cadastrar-pj/cadastrar-pj.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,10 @@ import { LoginRoutingModule } from './autenticacao/login/login-routing.module';
     MatButtonModule,
     LoginModule,
     LoginRoutingModule,
+    CadastrarPjComponent,
 
     AppRoutingModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
