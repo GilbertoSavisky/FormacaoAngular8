@@ -7,6 +7,7 @@ import { MatButtonModule, MatIconModule, MatInputModule, MatListModule, MatSnack
 import { RouterModule } from '@angular/router';
 import { LogarComponent } from './components/logar.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login.service';
 
 
 @NgModule({
@@ -27,5 +28,9 @@ import { LoginComponent } from './components/login/login.component';
     MatSnackBarModule,
     FlexLayoutModule
   ],
+
+  providers: [
+    LoginService
+  ]
 })
 export class LoginModule { }
