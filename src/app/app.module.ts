@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './autenticacao';
 import { LoginRoutingModule } from './autenticacao/login/login-routing.module';
-import { CadastrarPjComponent } from './autenticacao/cadastro-pj/components/cadastrar-pj/cadastrar-pj.component';
+import { CadastroPjModule } from './autenticacao/cadastro-pj/cadastro-pj.module';
+import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CadastrarPjComponent } from './autenticacao/cadastro-pj/components/cada
     MatButtonModule,
     LoginModule,
     LoginRoutingModule,
-    CadastrarPjComponent,
+    CadastroPjModule,
+    CadastroPjRoutingModule,
 
     AppRoutingModule
     
