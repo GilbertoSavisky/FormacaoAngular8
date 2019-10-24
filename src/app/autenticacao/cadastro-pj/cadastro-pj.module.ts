@@ -4,6 +4,9 @@ import { CadastrarPjComponent } from './components/cadastrar-pj/cadastrar-pj.com
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { CadastroPjComponent } from './components/cadastro-pj.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule, MatButtonModule, MatListModule, MatTooltipModule, MatIconModule, MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,15 @@ import { CadastroPjComponent } from './components/cadastro-pj.component';
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
+    MatListModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatSnackBarModule
   ]
 })
 export class CadastroPjModule { }
