@@ -7,6 +7,7 @@ import { CadastroPjComponent } from './components/cadastro-pj.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule, MatButtonModule, MatListModule, MatTooltipModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MatInputModule, MatButtonModule, MatListModule, MatTooltipModule, MatIc
     MatListModule,
     MatTooltipModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    SharedModule
   ]
 })
 export class CadastroPjModule { }
