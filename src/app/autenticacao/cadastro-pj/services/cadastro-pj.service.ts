@@ -3,17 +3,17 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../../../environments/environment';
 
-import { Login } from '../';
+import { CadastroPj } from '../';
 
 @Injectable()
-export class LoginService {
+export class CadastrarPjService {
 
-  private readonly PATH: string = 'auth';
+  private readonly PATH: string = 'cadastrar-pj';
 
   constructor(private http: HttpClient) { }
 
-  logar(login: Login): Observable<any> {
- 	return this.http.post(env.baseUrl + this.PATH, login);
+  cadastrar(cadastroPj: CadastroPj): Observable<any> {
+  	  return this.http.post(env.baseApiUrl + this.PATH, cadastroPj);
   }
 
 }

@@ -1,19 +1,19 @@
-import {
-  Directive,
-  HostListener,
-  Input,
-  ElementRef
+import { 
+  Directive, 
+  HostListener, 
+  Input, 
+  ElementRef 
 } from '@angular/core';
-import {
-  NG_VALUE_ACCESSOR, ControlValueAccessor
+import { 
+  NG_VALUE_ACCESSOR, ControlValueAccessor 
 } from '@angular/forms';
 
 @Directive({
   selector: '[mascara]',
   providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: MascaraDirective,
-    multi: true
+    provide: NG_VALUE_ACCESSOR, 
+    useExisting: MascaraDirective, 
+    multi: true 
   }]
 })
 export class MascaraDirective implements ControlValueAccessor {
@@ -39,7 +39,7 @@ export class MascaraDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  @HostListener('keyup', ['$event'])
+  @HostListener('keyup', ['$event']) 
   onKeyup($event: any) {
     let valor: string = $event.target.value.replace(/\D/g, '');
 
@@ -57,7 +57,7 @@ export class MascaraDirective implements ControlValueAccessor {
     $event.target.value = this.aplicarMascara(valor);
   }
 
-  @HostListener('blur', ['$event'])
+  @HostListener('blur', ['$event']) 
   onBlur($event: any) {
     if ($event.target.value.length === this.mascara.length) {
       return;
@@ -71,7 +71,7 @@ export class MascaraDirective implements ControlValueAccessor {
     let pad = this.mascara.replace(/\D/g, '').replace(/9/g, '_');
     let valorMask = valor + pad.substring(0, pad.length - valor.length);
     let valorMaskPos = 0;
-
+    
     valor = '';
     for (let i = 0; i < this.mascara.length; i++) {
       if (isNaN(parseInt(this.mascara.charAt(i)))) {
@@ -80,7 +80,7 @@ export class MascaraDirective implements ControlValueAccessor {
         valor += valorMask[valorMaskPos++];
       }
     }
-
+    
     if (valor.indexOf('_') > -1) {
       valor = valor.substr(0, valor.indexOf('_'));
     }

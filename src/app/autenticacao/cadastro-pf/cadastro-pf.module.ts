@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,14 +14,17 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule } from '../../shared/shared.module';
 
-import { LoginComponent, LogarComponent } from './components';
-import { LoginService } from './services';
+import { 
+	CadastrarPfComponent, 
+	CadastroPfComponent 
+} from './components';
 
 @NgModule({
   imports: [
     CommonModule,
+    FlexLayoutModule,
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -30,14 +34,11 @@ import { LoginService } from './services';
     MatTooltipModule,
     MatIconModule,
     MatSnackBarModule,
-    FlexLayoutModule
+    SharedModule
   ],
   declarations: [
-  	LoginComponent,
-  	LogarComponent
-  ],
-  providers: [
-  	LoginService
+  	CadastrarPfComponent,
+  	CadastroPfComponent
   ]
 })
-export class LoginModule { }
+export class CadastroPfModule { }
