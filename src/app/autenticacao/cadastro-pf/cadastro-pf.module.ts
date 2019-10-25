@@ -21,6 +21,8 @@ import {
 	CadastroPfComponent 
 } from './components';
 
+import { CadastrarPfService } from './services';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +41,9 @@ import {
   declarations: [
   	CadastrarPfComponent,
   	CadastroPfComponent
+  ],
+  providers: [
+    CadastrarPfService
   ]
 })
 export class CadastroPfModule { }
