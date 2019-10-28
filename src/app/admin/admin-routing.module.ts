@@ -8,14 +8,17 @@ import {
 	AdminComponent
 } from './components';
 
+import { AdminGuard } from './services';
+
 export const AdminRoutes: Routes = [
 	{
 		path: 'admin',
 		component: AdminComponent,
+		canActivate: [ AdminGuard ],
 		children: [
 		  {
 			path: '', 
-			component: ListagemComponent 
+			component: ListagemComponent
 		  },
 		  {
 			path: 'cadastro', 

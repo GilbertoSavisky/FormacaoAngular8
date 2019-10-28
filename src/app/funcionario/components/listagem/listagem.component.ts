@@ -17,20 +17,20 @@ export class ListagemComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
-    private lancamentoService: LancamentoService,
-    private snackBar: MatSnackBar) { }
+  private lancamentoService: LancamentoService,
+  private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.lancamentoService.listarTodosLancamentos()
       .subscribe(
         data => {
-          const lancamentos = data['data'] as Lancamento[];
+          const lancamentos = data.data as Lancamento[];
           this.dataSource = new MatTableDataSource<Lancamento>(lancamentos);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         },
         err => {
-          const msg: string = 'Erro obtendo lançamentos.';
+          const msg = 'Erro obtendo lançamentos.';
           this.snackBar.open(msg, 'Erro', { duration: 5000 });
         }
       );

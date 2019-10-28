@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSelect, MatSnackBar, MatTableDataSource, PageEvent, Sort } from '@angular/material';
+import { MatDialog, MatSelect, MatSnackBar, MatTableDataSource, MAT_DIALOG_DATA, PageEvent, Sort } from '@angular/material';
 import { Funcionario, FuncionarioService, HttpUtilService, Lancamento, LancamentoService } from '../../../shared';
 
 
@@ -30,7 +30,8 @@ export class ListagemComponent implements OnInit {
     private httpUtil: HttpUtilService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private funcionarioService: FuncionarioService) { }
+    private funcionarioService: FuncionarioService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.pagina = 0;
@@ -51,7 +52,7 @@ export class ListagemComponent implements OnInit {
   }
 
   get funcId(): string {
-    return sessionStorage['funcionarioId'] || false;
+    return sessionStorage.funcionarioId || false;
   }
 
   obterFuncionarios() {
@@ -60,7 +61,7 @@ export class ListagemComponent implements OnInit {
         data => {
           const usuarioId: string = this.httpUtil.obterIdUsuario();
           this.funcionarios = (data.data as Funcionario[])
-            .filter(func => func.id != usuarioId);
+            .filter(func => func.id !== usuarioId);
 
           if (this.funcId) {
             this.form.get('funcs').setValue(parseInt(this.funcId, 10));
@@ -68,7 +69,7 @@ export class ListagemComponent implements OnInit {
           }
         },
         err => {
-          const msg: string = 'Erro obtendo funcionários.';
+          const msg = 'Erro obtendo funcionários.';
           this.snackBar.open(msg, 'Erro', { duration: 5000 });
         }
       );
@@ -76,31 +77,28 @@ export class ListagemComponent implements OnInit {
 
   exibirLancamentos() {
     if (this.matSelect.selected) {
+      // tslint:disable-next-line:no-string-literal
       this.funcionarioId = this.matSelect.selected['value'];
     } else if (this.funcId) {
       this.funcionarioId = this.funcId;
     } else {
       return;
     }
-    sessionStorage['funcionarioId'] = this.funcionarioId;
+    sessionStorage.funcionarioId = this.funcionarioId;
 
     this.lancamentoService.listarLancamentosPorFuncionario(
         this.funcionarioId, this.pagina, this.ordem, this.direcao)
       .subscribe(
         data => {
-          this.totalLancamentos = data['data'].totalElements;
-          const lancamentos = data['data'].content as Lancamento[];
+          this.totalLancamentos = data.data.totalElements;
+          const lancamentos = data.data.content as Lancamento[];
           this.dataSource = new MatTableDataSource<Lancamento>(lancamentos);
         },
         err => {
-          const msg: string = "Erro obtendo lançamentos.";
-          this.snackBar.open(msg, "Erro", { duration: 5000 });
+          const msg = 'Erro obtendo lançamentos.';
+          this.snackBar.open(msg, 'Erro', { duration: 5000 });
         }
       );
-  }
-
-  remover(lancamentoId: string) {
-    alert(lancamentoId);
   }
 
   paginar(pageEvent: PageEvent) {
@@ -118,6 +116,51 @@ export class ListagemComponent implements OnInit {
     this.exibirLancamentos();
   }
 
+  removerDialog(lancamentoId: string) {
+    const dialog = this.dialog.open(ConfirmarDialog, {});
+    dialog.afterClosed().subscribe(remover => {
+      if (remover) {
+        this.remover(lancamentoId);
+      }
+    });
+  }
+
+  remover(lancamentoId: string) {
+    this.lancamentoService.remover(lancamentoId)
+      .subscribe(
+        data => {
+          const msg: string = "Lançamento removido com sucesso!";
+          this.snackBar.open(msg, "Sucesso", { duration: 5000 });
+          this.exibirLancamentos();
+        },
+        err => {
+          let msg: string = "Tente novamente em instantes.";
+          if (err.status == 400) {
+            msg = err.error.errors.join(' ');
+          }
+          this.snackBar.open(msg, "Erro", { duration: 5000 });
+        }
+      );
+  }
+
+}
+
+@Component({
+  selector: 'confirmar-dialog',
+  template: `
+    <h1 mat-dialog-title>Deseja realmente remover o lançamento?</h1>
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="false" tabindex="-1">
+        Não
+      </button>
+      <button mat-button [mat-dialog-close]="true" tabindex="2">
+        Sim
+      </button>
+    </div>
+  `,
+})
+export class ConfirmarDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }
 
 
