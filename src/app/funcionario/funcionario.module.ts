@@ -27,7 +27,7 @@ import {
 import { 
   HttpUtilService, 
   LancamentoService,
-  PtBrMatPaginatorIntl,
+  PtBrMatPaginatorIntl
 } from '../shared';
 
 import { SharedModule } from '../shared/shared.module';

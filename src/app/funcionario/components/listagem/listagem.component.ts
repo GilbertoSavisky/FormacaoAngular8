@@ -13,12 +13,12 @@ export class ListagemComponent implements OnInit {
   dataSource: MatTableDataSource<Lancamento>;
   colunas: string[] = ['data', 'tipo', 'localizacao'];
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
-  private lancamentoService: LancamentoService,
-  private snackBar: MatSnackBar) { }
+    private lancamentoService: LancamentoService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.lancamentoService.listarTodosLancamentos()
