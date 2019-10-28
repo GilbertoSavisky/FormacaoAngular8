@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CadastroPj } from '../';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../../../environments/environment';
 
+import { CadastroPj } from '../';
 
 @Injectable()
 export class CadastrarPjService {

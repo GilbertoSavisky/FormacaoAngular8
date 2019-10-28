@@ -15,6 +15,7 @@ export class ListagemComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   constructor(
   private lancamentoService: LancamentoService,
   private snackBar: MatSnackBar) { }

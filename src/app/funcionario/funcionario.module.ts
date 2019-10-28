@@ -14,7 +14,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatCardModule
+  MatCardModule,
+  MatPaginatorIntl
 } from '@angular/material';
 
 import { 
@@ -25,8 +26,11 @@ import {
 
 import { 
   HttpUtilService, 
-  LancamentoService
+  LancamentoService,
+  PtBrMatPaginatorIntl,
 } from '../shared';
+
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -43,7 +47,8 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    SharedModule
   ],
   declarations: [
   	ListagemComponent, 
@@ -52,7 +57,14 @@ import {
   ],
   providers: [
     HttpUtilService, 
-    LancamentoService
+    LancamentoService,
+    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
   ]
 })
 export class FuncionarioModule { }
+
+
+
+
+
+
