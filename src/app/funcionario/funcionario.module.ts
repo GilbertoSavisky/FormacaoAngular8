@@ -23,6 +23,11 @@ import {
 	FuncionarioComponent 
 } from './components';
 
+import { 
+  HttpUtilService, 
+  LancamentoService
+} from '../shared';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -44,6 +49,10 @@ import {
   	ListagemComponent, 
   	LancamentoComponent,
   	FuncionarioComponent
+  ],
+  providers: [
+    HttpUtilService, 
+    LancamentoService
   ]
 })
 export class FuncionarioModule { }
